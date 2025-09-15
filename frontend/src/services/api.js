@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // La URL base de tu backend - cambiar por tu URL de producción cuando despliegues
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://crypto-info-d1iv.onrender.com';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
