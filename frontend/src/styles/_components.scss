@@ -1,0 +1,169 @@
+.header {
+  @include flex-center;
+  justify-content: space-between;
+  height: $header-height;
+  padding: 0 20px;
+  margin-bottom: 30px;
+
+  @include responsive(mobile) {
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    background: linear-gradient(45deg, $primary-color, $secondary-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 2.5rem;
+
+    @include responsive(mobile) {
+      font-size: 2rem;
+    }
+  }
+
+  .last-updated {
+    color: $text-secondary;
+    font-size: 0.9rem;
+  }
+}
+
+.crypto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+
+  @include responsive(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+.crypto-card {
+  @include card-style;
+  cursor: pointer;
+
+  .crypto-header {
+    @include flex-center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    .crypto-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .crypto-symbol {
+      background-color: rgba($secondary-color, 0.2);
+      color: $secondary-color;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+  }
+
+  .crypto-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .price-change {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+
+    &.positive {
+      background-color: rgba($green, 0.2);
+      color: $green;
+    }
+
+    &.negative {
+      background-color: rgba($red, 0.2);
+      color: $red;
+    }
+  }
+}
+
+.detail-view {
+  @include card-style;
+  margin-top: 30px;
+
+  .detail-header {
+    @include flex-center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    @include responsive(mobile) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    .back-button {
+      background: linear-gradient(45deg, $primary-color, $secondary-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: $border-radius;
+      cursor: pointer;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .price-large {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 15px 0;
+  }
+
+  .market-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+
+    .data-item {
+      @include card-style;
+      padding: 15px;
+
+      .label {
+        color: $text-secondary;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .value {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.chart-container {
+  @include card-style;
+  margin-top: 20px;
+  height: 300px;
+}
+
+.loading, .error {
+  @include flex-center;
+  height: 200px;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: $red;
+}
