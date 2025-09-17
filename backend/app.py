@@ -13,7 +13,7 @@ CORS(app)  # Esto permite peticiones desde tu frontend de React
 
 # Configuración
 COINGECKO_API_URL = "https://api.coingecko.com/api/v3"
-CACHE_DURATION = 60  # Segundos para cachear los datos
+CACHE_DURATION = 300  # Segundos para cachear los datos
 cache = {"data": None, "timestamp": 0}
 
 def get_crypto_data():
