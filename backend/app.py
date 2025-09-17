@@ -52,13 +52,23 @@ def get_crypto_data():
 
 @app.route('/api/cryptocurrencies', methods=['GET'])
 def get_cryptocurrencies():
-    """Endpoint para obtener las principales criptomonedas"""
-    data = get_crypto_data()
-    
-    if data is None:
-        return jsonify({"error": "No se pudieron obtener los datos"}), 500
-        
-    return jsonify(data)
+    try:
+        data = get_crypto_data()
+        if data is None:
+            # Intentar devolver datos cacheados incluso si la solicitud actual falla
+            if cache['data']:
+                return jsonify(cache['data'])
+            return jsonify({"error": "No se pudieron obtener los datos"}), 500
+        return jsonify(data)
+    except requests.exceptions.RequestException as e:
+        # Manejar error 429 específicamente
+        if hasattr(e.response, 'status_code') and e.response.status_code == 429:
+            # Registrar el error y posiblemente usar datos cacheados
+            print("Rate limit excedido. Usando datos cacheados.")
+            if cache['data']:
+                return jsonify(cache['data'])
+            return jsonify({"error": "Límite de solicitudes excedido. Intenta más tarde."}), 429
+        return jsonify({"error": "Error interno del servidor"}), 500
 
 @app.route('/api/cryptocurrencies/<coin_id>', methods=['GET'])
 def get_coin_detail(coin_id):

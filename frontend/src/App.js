@@ -19,7 +19,7 @@ function App() {
     fetchCryptocurrencies();
     
     // Actualizar cada 60 segundos
-    const interval = setInterval(fetchCryptocurrencies, 60000);
+    const interval = setInterval(fetchCryptocurrencies, 300000);
     
     return () => clearInterval(interval);
   }, []);
